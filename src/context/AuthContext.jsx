@@ -1,10 +1,4 @@
-
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 import { supabase } from "../lib/supabase";
 
@@ -100,6 +94,14 @@ export function AuthProvider({ children }) {
     };
   }, [session?.user?.id]);
 
+  const signOut = async () => {
+    const { error } = await supabase.auth.signOut();
+
+    if (error) {
+      throw error;
+    }
+  };
+
   const value = {
     session,
     user: session?.user ?? null,
@@ -108,13 +110,10 @@ export function AuthProvider({ children }) {
     profileLoading,
     profileCheckedUserId,
     isAdmin: profile?.role === "admin",
+    signOut,
   };
 
-  return (
-    <AuthContext.Provider value={value}>
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 
 export function useAuth() {
