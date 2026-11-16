@@ -18,11 +18,17 @@ Project: Test Case & Bug Tracking Web App
 - [x] Git initialized.
 - [x] GitHub repository created.
 - [x] Initial source code pushed to GitHub.
+- [x] Project documentation prepared (PRD, Development Roadmap, Development Log).
+- [x] Supabase JavaScript client installed.
+- [x] Environment variables configured in `.env`.
+- [x] Supabase client configured in `src/lib/supabase.js`.
+- [x] Supabase Auth API connectivity verified (HTTP 200).
+- [x] Application successfully runs in development mode.
+- [x] Production build completed successfully.
 
 ### Pending
 
-- [ ] Prepare project documentation.
-- [ ] Connect Supabase to the application.
+- [ ] Commit and push Day 1 changes to GitHub.
 
 ### Repository
 
@@ -33,9 +39,13 @@ https://github.com/Kautsaral/test-case-bug-tracking
 - Project directory: D:\test-case-bug-tracking
 - Framework: React + Vite
 - Language: JavaScript
+- Styling: Tailwind CSS v4
+- Backend: Supabase
 - Branch: main
 - Development budget target: Rp0
+- Supabase Auth API verified successfully.
+- Database connectivity and authentication implementation will be handled in Day 2.
 
 ### Next Step
 
-Complete project documentation and connect Supabase.
+Finalize Day 1 changes and push them to GitHub.
