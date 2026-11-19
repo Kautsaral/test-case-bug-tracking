@@ -112,8 +112,9 @@ https://github.com/Kautsaral/test-case-bug-tracking
 
 - `7c071c4` — feat: implement admin session and protected routes
 - `52a2efc` — feat: implement admin logout
+- `19a67d9` — docs: complete day 2 development log
 
-
+---
 
 ## Day 3 — Layout & Dashboard
 
@@ -141,17 +142,46 @@ https://github.com/Kautsaral/test-case-bug-tracking
 - [x] Test Cases section placeholder implemented.
 - [x] Bug Reports section placeholder implemented.
 
-### Authentication & Layout Testing
+### Admin Layout
+
+- [x] AuthContext separated into dedicated context and hook files.
+- [x] AdminLayout component created.
+- [x] Admin sidebar implemented using Chelsea Blue.
+- [x] Admin topbar implemented.
+- [x] Dashboard navigation integrated.
+- [x] Responsive mobile sidebar drawer implemented.
+- [x] Sidebar overlay and close interactions implemented.
+
+### Initial Dashboard
+
+- [x] Dashboard summary cards implemented.
+- [x] Total Modules statistic integrated with Supabase.
+- [x] Total Test Cases statistic integrated with Supabase.
+- [x] Test Executions summary implemented.
+- [x] Bug Reports summary implemented.
+- [x] Release status summary implemented.
+- [x] Recent Test Cases section implemented.
+- [x] Recent Bug Reports section implemented.
+- [x] Recent Releases section implemented.
+- [x] Loading state implemented.
+- [x] Error handling and retry action implemented.
+- [x] Empty state for tables without records implemented.
+- [x] Dashboard refresh action implemented.
+- [x] Dashboard statistics use existing database schema and status constraints.
+
+### Testing & Verification
 
 - [x] Public homepage displayed successfully.
-- [ ] Navigation links tested.
+- [ ] Public navigation links tested.
 - [x] Admin login successful.
 - [x] Admin dashboard accessible after login.
 - [x] Admin logout successful.
 - [x] Admin Layout displayed successfully.
-- [x] Admin Sidebar navigation implemented.
-- [x] Admin Sidebar mobile drawer implemented.
-- [x] Mobile sidebar open and close interactions tested.
+- [x] Admin mobile sidebar open and close interactions tested.
+- [x] Initial Dashboard displayed successfully in browser.
+- [x] Dashboard data retrieved successfully from Supabase.
+- [x] Dashboard empty states displayed correctly.
+- [x] Dashboard refresh interaction verified.
 - [x] Production build completed successfully.
 - [x] ESLint passed.
 
@@ -159,11 +189,13 @@ https://github.com/Kautsaral/test-case-bug-tracking
 
 - [ ] Public Viewer runtime data access testing after public data functionality is implemented.
 - [ ] Public navigation links testing.
-- [ ] Initial Dashboard implementation.
+- [ ] Dashboard and other feature-specific testing as their functionality is developed.
 
 ### Git Commits
 
 - `5e928f6` — refactor: separate auth context and add public layout
+- `61927c7` — feat: implement public and admin layouts
+- `de9bce9` — docs: complete day 3 admin layout progress
 
 ## Current Progress
 
@@ -171,9 +203,9 @@ https://github.com/Kautsaral/test-case-bug-tracking
 - [x] 3.2 Define application layout and design direction.
 - [x] 3.3 Create Public Viewer Layout.
 - [x] 3.4 Create Admin Layout and Sidebar.
-- [ ] 3.5 Initial Dashboard.
+- [x] 3.5 Initial Dashboard.
 - [ ] 3.6 Testing, Development Log update, commit and push.
 
 ## Next Step
 
-Proceed to Day 3 — Checkpoint 3.5: Initial Dashboard.
+Proceed to Day 3 — Checkpoint 3.6: Final Testing, Development Log update, commit and push.
