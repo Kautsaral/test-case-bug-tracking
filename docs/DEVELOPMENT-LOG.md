@@ -114,6 +114,63 @@ https://github.com/Kautsaral/test-case-bug-tracking
 - `52a2efc` — feat: implement admin logout
 
 
+
+## Day 3 — Layout & Dashboard
+
+### Structure & Design
+
+- [x] Existing project structure and components reviewed.
+- [x] Application layout direction defined.
+- [x] Public Viewer layout direction defined.
+- [x] Admin layout direction defined.
+- [x] Chelsea FC color palette selected:
+  - Blue: #034694
+  - Red: #EE242C
+  - Gold: #DBA111
+  - Light Blue: #6A7AB5
+  - Gray: #D1D3D4
+
+### Public Viewer Layout
+
+- [x] PublicLayout component created.
+- [x] Public navigation bar implemented.
+- [x] Public main content layout implemented.
+- [x] Public footer implemented.
+- [x] HomePage integrated with PublicLayout.
+- [x] Overview section implemented.
+- [x] Test Cases section placeholder implemented.
+- [x] Bug Reports section placeholder implemented.
+
+### Authentication & Layout Testing
+
+- [x] Public homepage displayed successfully.
+- [ ] Navigation links tested.
+- [x] Admin login successful.
+- [x] Admin dashboard accessible after login.
+- [x] Admin logout successful.
+- [x] Production build completed successfully.
+- [x] ESLint passed.
+
+### Pending Verification
+
+- [ ] Public Viewer runtime data access testing after public data functionality is implemented.
+- [ ] Mobile navigation responsiveness testing.
+- [ ] Admin Layout and Sidebar implementation.
+- [ ] Initial Dashboard implementation.
+
+### Git Commits
+
+- `5e928f6` — refactor: separate auth context and add public layout
+
+## Current Progress
+
+- [x] 3.1 Audit structure and components.
+- [x] 3.2 Define application layout and design direction.
+- [x] 3.3 Create Public Viewer Layout.
+- [ ] 3.4 Create Admin Layout and Sidebar.
+- [ ] 3.5 Initial Dashboard.
+- [ ] 3.6 Testing, Development Log update, commit and push.
+
 ## Next Step
 
-Proceed to Day 3 — Layout & Dashboard after confirming the Day 2 documentation.
+Proceed to Day 3 — Checkpoint 3.4: Admin Layout & Sidebar.
