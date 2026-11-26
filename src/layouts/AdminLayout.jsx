@@ -1,16 +1,24 @@
 import { useState } from "react";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { useAuth } from "../context/useAuth";
 
 function AdminLayout() {
   const { profile } = useAuth();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const location = useLocation();
+  const pageTitle = location.pathname.startsWith("/admin/modules")
+    ? "Module Management"
+    : "Admin Dashboard";
 
   const navigation = [
     {
       label: "Dashboard",
       to: "/admin",
       end: true,
+    },
+    {
+      label: "Modules",
+      to: "/admin/modules",
     },
   ];
 
@@ -89,7 +97,7 @@ function AdminLayout() {
 
             <div>
               <h1 className="text-sm font-semibold text-slate-900">
-                Admin Dashboard
+                {pageTitle}
               </h1>
               <p className="hidden text-xs text-slate-500 sm:block">
                 Manage your QA workspace
