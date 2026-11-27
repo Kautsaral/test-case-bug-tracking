@@ -1,9 +1,18 @@
 import { useCallback, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 import { useAuth } from "../context/useAuth";
 import { supabase } from "../lib/supabase";
 
 const priorities = ["Low", "Medium", "High", "Critical"];
+const priorityOrder = { Low: 1, Medium: 2, High: 3, Critical: 4 };
+
+const sortOptions = [
+  { value: "tc_code", label: "TC Code" },
+  { value: "title", label: "Title" },
+  { value: "priority", label: "Priority" },
+  { value: "created_at", label: "Created Date" },
+];
 
 const emptyForm = {
   title: "",
@@ -46,6 +55,11 @@ function AdminTestCasesPage() {
   const [editingTestCase, setEditingTestCase] = useState(null);
   const [saving, setSaving] = useState(false);
   const [formError, setFormError] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [moduleFilter, setModuleFilter] = useState("");
+  const [priorityFilter, setPriorityFilter] = useState("");
+  const [sortField, setSortField] = useState("created_at");
+  const [sortDirection, setSortDirection] = useState("desc");
 
   const fetchPageData = useCallback(async () => {
     setLoading(true);
@@ -114,6 +128,45 @@ function AdminTestCasesPage() {
     });
     setFormError("");
     window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const visibleTestCases = testCases
+    .filter((testCase) => {
+      const normalizedSearch = searchTerm.trim().toLocaleLowerCase();
+      const matchesSearch =
+        !normalizedSearch ||
+        testCase.tc_code?.toLocaleLowerCase().includes(normalizedSearch) ||
+        testCase.title?.toLocaleLowerCase().includes(normalizedSearch);
+      const matchesModule = !moduleFilter || testCase.module_id === moduleFilter;
+      const matchesPriority = !priorityFilter || testCase.priority === priorityFilter;
+
+      return matchesSearch && matchesModule && matchesPriority;
+    })
+    .sort((first, second) => {
+      const direction = sortDirection === "asc" ? 1 : -1;
+      const firstValue = first[sortField] ?? "";
+      const secondValue = second[sortField] ?? "";
+
+      if (sortField === "created_at") {
+        return (new Date(firstValue).getTime() - new Date(secondValue).getTime()) * direction;
+      }
+
+      if (sortField === "priority") {
+        return ((priorityOrder[firstValue] ?? 0) - (priorityOrder[secondValue] ?? 0)) * direction;
+      }
+
+      return String(firstValue).localeCompare(String(secondValue), "en", {
+        numeric: sortField === "tc_code",
+        sensitivity: "base",
+      }) * direction;
+    });
+
+  const clearListControls = () => {
+    setSearchTerm("");
+    setModuleFilter("");
+    setPriorityFilter("");
+    setSortField("created_at");
+    setSortDirection("desc");
   };
 
   const handleSubmit = async (event) => {
@@ -328,8 +381,92 @@ function AdminTestCasesPage() {
         <div className="border-b border-slate-100 px-5 py-4 sm:px-6">
           <h3 className="font-semibold text-slate-900">All Test Cases</h3>
           <p className="mt-1 text-xs text-slate-500">
-            {testCases.length} Test Case{testCases.length === 1 ? "" : "s"}
+            Showing {visibleTestCases.length} of {testCases.length} Test Case{testCases.length === 1 ? "" : "s"}
           </p>
+        </div>
+
+        <div className="grid gap-3 border-b border-slate-100 p-5 sm:grid-cols-2 xl:grid-cols-5 sm:px-6">
+          <label className="block text-sm font-medium text-slate-700 xl:col-span-2">
+            Search Test Cases
+            <input
+              type="search"
+              value={searchTerm}
+              onChange={(event) => setSearchTerm(event.target.value)}
+              className="mt-2 w-full rounded-lg border border-[#D1D3D4] px-3 py-2.5 text-sm font-normal text-slate-900 outline-none transition focus:border-[#034694] focus:ring-2 focus:ring-[#034694]/15"
+              placeholder="Search by TC Code or title"
+            />
+          </label>
+
+          <label className="block text-sm font-medium text-slate-700">
+            Module
+            <select
+              value={moduleFilter}
+              onChange={(event) => setModuleFilter(event.target.value)}
+              className="mt-2 w-full rounded-lg border border-[#D1D3D4] bg-white px-3 py-2.5 text-sm font-normal text-slate-900 outline-none transition focus:border-[#034694] focus:ring-2 focus:ring-[#034694]/15"
+            >
+              <option value="">All Modules</option>
+              {modules.map((module) => (
+                <option key={module.id} value={module.id}>{module.name}</option>
+              ))}
+            </select>
+          </label>
+
+          <label className="block text-sm font-medium text-slate-700">
+            Priority
+            <select
+              value={priorityFilter}
+              onChange={(event) => setPriorityFilter(event.target.value)}
+              className="mt-2 w-full rounded-lg border border-[#D1D3D4] bg-white px-3 py-2.5 text-sm font-normal text-slate-900 outline-none transition focus:border-[#034694] focus:ring-2 focus:ring-[#034694]/15"
+            >
+              <option value="">All Priorities</option>
+              {priorities.map((priority) => (
+                <option key={priority} value={priority}>{priority}</option>
+              ))}
+            </select>
+          </label>
+
+          <div className="grid grid-cols-2 gap-2">
+            <label className="block text-sm font-medium text-slate-700">
+              Sort by
+              <select
+                value={sortField}
+                onChange={(event) => setSortField(event.target.value)}
+                className="mt-2 w-full rounded-lg border border-[#D1D3D4] bg-white px-3 py-2.5 text-sm font-normal text-slate-900 outline-none transition focus:border-[#034694] focus:ring-2 focus:ring-[#034694]/15"
+              >
+                {sortOptions.map((option) => (
+                  <option key={option.value} value={option.value}>{option.label}</option>
+                ))}
+              </select>
+            </label>
+            <label className="block text-sm font-medium text-slate-700">
+              Direction
+              <select
+                value={sortDirection}
+                onChange={(event) => setSortDirection(event.target.value)}
+                className="mt-2 w-full rounded-lg border border-[#D1D3D4] bg-white px-3 py-2.5 text-sm font-normal text-slate-900 outline-none transition focus:border-[#034694] focus:ring-2 focus:ring-[#034694]/15"
+              >
+                <option value="asc">Ascending ↑</option>
+                <option value="desc">Descending ↓</option>
+              </select>
+            </label>
+          </div>
+
+          <div className="flex items-end xl:col-span-5">
+            <button
+              type="button"
+              onClick={clearListControls}
+              disabled={
+                !searchTerm &&
+                !moduleFilter &&
+                !priorityFilter &&
+                sortField === "created_at" &&
+                sortDirection === "desc"
+              }
+              className="rounded-lg border border-[#D1D3D4] bg-white px-3 py-2.5 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              Clear Search & Filters
+            </button>
+          </div>
         </div>
 
         {loading ? (
@@ -351,6 +488,17 @@ function AdminTestCasesPage() {
           <p className="px-5 py-10 text-center text-sm text-slate-500">
             No Test Cases yet. Create a Test Case to get started.
           </p>
+        ) : visibleTestCases.length === 0 ? (
+          <div className="px-5 py-10 text-center">
+            <p className="text-sm text-slate-500">No Test Cases match the current search and filters.</p>
+            <button
+              type="button"
+              onClick={clearListControls}
+              className="mt-3 text-sm font-semibold text-[#034694] hover:underline"
+            >
+              Clear search and filters
+            </button>
+          </div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full min-w-[760px] text-left text-sm">
@@ -363,7 +511,7 @@ function AdminTestCasesPage() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
-                {testCases.map((testCase) => (
+                {visibleTestCases.map((testCase) => (
                   <tr key={testCase.id}>
                     <td className="max-w-md px-5 py-4 sm:px-6">
                       <p className="font-semibold text-slate-900">{testCase.title}</p>
@@ -379,6 +527,12 @@ function AdminTestCasesPage() {
                     </td>
                     <td className="px-5 py-4 sm:px-6">
                       <div className="flex justify-end">
+                        <Link
+                          to={`/admin/test-cases/${testCase.id}`}
+                          className="rounded-md border border-[#034694]/20 px-2.5 py-1.5 text-xs font-semibold text-[#034694] hover:bg-[#034694]/5"
+                        >
+                          View
+                        </Link>
                         <button
                           type="button"
                           onClick={() => handleEdit(testCase)}

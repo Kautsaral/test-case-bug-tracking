@@ -332,6 +332,43 @@ https://github.com/Kautsaral/test-case-bug-tracking
 
 - [x] Admin Test Case List & CRUD implementation completed and verified.
 
+### 5.3 Search, Filter & Sorting
+
+#### Implementation
+
+- [x] Case-insensitive search by Test Case Code and Title implemented.
+- [x] Module and Priority filters implemented.
+- [x] Search and filters can be combined.
+- [x] Sorting by Test Case Code, Title, Priority, and Created Date implemented.
+- [x] Priority sorting follows Low, Medium, High, Critical order.
+- [x] Clear Search & Filters resets the search and filters and restores Created Date descending sorting.
+
+#### Testing & Verification
+
+- [x] Browser testing passed.
+- [x] `npm run lint` passed.
+- [x] `npm run build` passed (bundle size warning: JavaScript bundle exceeds 500 kB).
+- [x] `git diff --check` exited with code 0 (line ending LF/CRLF warnings reported).
+
+### 5.3 Implementation Result
+
+- [x] Test Case search, filters, and sorting implemented and verified.
+- [x] Admin Test Case Detail Page implemented at `/admin/test-cases/:id`.
+
+#### Admin Test Case Detail Page — Testing & Verification
+
+- [x] Manual browser testing: Detail page opened using the View action.
+- [x] Manual browser testing: Test Case information and all detail fields verified.
+- [x] Manual browser testing: Detail page remained available after refresh.
+- [x] Manual browser testing: Back to Test Cases returned to the list.
+- [x] Manual browser testing: Invalid UUID handled correctly.
+- [x] Manual browser testing: Valid UUID with no matching record handled correctly.
+- [x] Manual browser testing: No other Test Case record was displayed when the requested record was not found.
+- [x] Manual browser regression testing: Create, Update, Search, Filter, and Sorting passed.
+- [x] `npm run lint` passed.
+- [x] `npm run build` passed (bundle size warning: JavaScript bundle exceeds 500 kB).
+- [x] `git diff --check` exited with code 0 (line ending LF/CRLF warnings reported).
+
 ### Next Step
 
-Proceed to Checkpoint 5.3: Test Case Management follow-up, according to the locked roadmap.
+Proceed to Admin Test Case Publish/Unpublish and public visibility after confirmation.
