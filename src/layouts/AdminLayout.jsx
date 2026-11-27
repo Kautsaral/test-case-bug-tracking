@@ -8,7 +8,9 @@ function AdminLayout() {
   const location = useLocation();
   const pageTitle = location.pathname.startsWith("/admin/modules")
     ? "Module Management"
-    : "Admin Dashboard";
+    : location.pathname.startsWith("/admin/test-cases")
+      ? "Test Case Management"
+      : "Admin Dashboard";
 
   const navigation = [
     {
@@ -19,6 +21,10 @@ function AdminLayout() {
     {
       label: "Modules",
       to: "/admin/modules",
+    },
+    {
+      label: "Test Cases",
+      to: "/admin/test-cases",
     },
   ];
 

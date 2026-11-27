@@ -4,6 +4,7 @@ import HomePage from "./pages/HomePage";
 import AdminLoginPage from "./pages/AdminLoginPage";
 import AdminDashboardPage from "./pages/AdminDashboardPage";
 import AdminModulesPage from "./pages/AdminModulesPage";
+import AdminTestCasesPage from "./pages/AdminTestCasesPage";
 import NotFoundPage from "./pages/NotFoundPage";
 
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -21,6 +22,7 @@ function App() {
           <Route path="/admin" element={<AdminLayout />}>
             <Route index element={<AdminDashboardPage />} />
             <Route path="modules" element={<AdminModulesPage />} />
+            <Route path="test-cases" element={<AdminTestCasesPage />} />
           </Route>
         </Route>
 

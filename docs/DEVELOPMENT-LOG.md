@@ -279,6 +279,59 @@ https://github.com/Kautsaral/test-case-bug-tracking
 - [x] Module Management implementation completed.
 - [x] Feature verification completed, except Foreign Key Restriction verification pending Test Case Management.
 
+---
+
+## Day 5–6 — Test Case Management
+
+### 5.1 Audit Structure & Requirements
+
+#### Application Structure & Requirements Audit
+
+- [x] Audit of the application structure and Test Case Management requirements completed.
+
+#### Database Audit
+
+- [x] `test_cases` table columns verified.
+- [x] Constraints, Priority values, foreign keys, and `ON DELETE RESTRICT` verified.
+- [x] Admin and Public Viewer RLS policies verified.
+- [x] `updated_at` trigger verified.
+- [x] `generate_test_case_code()` function and `test_case_code_seq` sequence verified.
+- [x] `generate_test_case_code()` updated to use a minimum six-digit format (`TC-000001`) in accordance with the PRD.
+- [x] Sequence was not reset.
+- [x] No changes were made to table schema, RLS, Auth, Storage, or dependencies.
+
+### 5.1 Audit Result
+
+- [x] Application structure and requirements audit completed.
+- [x] Test Case database structure and access configuration verified.
+
+### 5.2 Implement Admin Test Case List & CRUD
+
+#### Implementation
+
+- [x] Admin Test Case Management page implemented.
+- [x] Protected `/admin/test-cases` route added.
+- [x] Test Cases navigation added to the Admin sidebar.
+- [x] Test Case list displays the related Module and Priority.
+- [x] Create and Update operations implemented.
+- [x] Test Case Code is generated automatically by the database using a minimum six-digit format (for example, `TC-000001`).
+- [x] Input validation and loading, saving, and error handling implemented.
+- [x] Database, SQL, Auth, RLS, Storage, and dependencies were not changed.
+
+#### Testing & Verification
+
+- [x] Browser: Test Case page and list loaded successfully.
+- [x] Browser: Test Case creation succeeded and the record appeared in the table.
+- [x] Browser: Test Case update succeeded and the Test Case Code remained unchanged.
+- [x] Browser: Test Case data remained available after refreshing the page.
+- [x] `npm run lint` passed.
+- [x] `npm run build` passed (bundle size warning: JavaScript bundle exceeds 500 kB).
+- [x] `git diff --check` passed.
+
+### 5.2 Implementation Result
+
+- [x] Admin Test Case List & CRUD implementation completed and verified.
+
 ### Next Step
 
-Proceed to Day 5–6: Test Case Management after confirmation.
+Proceed to Checkpoint 5.3: Test Case Management follow-up, according to the locked roadmap.
